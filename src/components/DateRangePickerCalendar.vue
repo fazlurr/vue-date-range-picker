@@ -73,6 +73,12 @@ export default {
       if (day.isBetween(this.startDate, this.endDate, 'days', '[]') || day.isSame(this.startDate)) {
         classes.push('daterangepicker-range')
       }
+
+      // Class for first & last selected date
+      if (day.isSame(this.startDate) || day.isSame(this.endDate)) {
+        classes.push('daterangepicker-range-edge')
+      }
+
       // Class for days between startDateCompare & endDateCompare or is startDateCompare (in case of startDateCompare after endDateCompare)
       if (this.compare && (day.isBetween(this.startDateCompare, this.endDateCompare, 'days', '[]') || day.isSame(this.startDateCompare))) {
         classes.push('daterangepicker-range-compare')
@@ -113,7 +119,10 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+$blue: #17a2b8;
+$orange: #ff9307;
+
 .daterangepicker-calendar-row {
   font-size: 14px;
   /*max-width: 230px;*/
@@ -127,17 +136,21 @@ export default {
 }
 
 .daterangepicker-range {
-  background-color: #17a2b8 !important;
+  background-color: $blue;
   color: #ffffff;
 }
 
+.daterangepicker-range-edge {
+  background-color: darken($blue, 10%);
+}
+
 .daterangepicker-range-compare {
-  background-color: #ff9307;
+  background-color: $orange;
   color: #ffffff;
 }
 
 .daterangepicker-range.daterangepicker-range-compare {
-  background: linear-gradient(0, #ff9307 50%, #17a2b8 50%);
+  background: linear-gradient(0, $orange 50%, $blue 50%);
 }
 
 .daterangepicker-cursor-pointer {
